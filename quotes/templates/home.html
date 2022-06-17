@@ -1,0 +1,57 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+{% if ticker %}
+    {{ ticker }}
+{% endif %}
+
+<br>
+<br>
+<!--{{ api }}-->
+<!--{% if api %}-->
+<!--    {% if api == "Error..." %}-->
+<!--        There was a problem with your ticker symbol, please try again..-->
+<!--    {% else %}-->
+
+<!--        <h1>{{ api.companyName }}</h1><br>-->
+<!--        Price: {{ api.latestPrice }}<br>-->
+<!--        Previous Close: {{ api.previousClose }}<br>-->
+<!--        Market Cap: {{ api.marketCap }}<br>-->
+<!--        YTD Change: {{ api.ytdChange }}<br>-->
+<!--        52 Weeks High: {{ api.week52High }}<br>-->
+<!--        52 Weeks Low: {{ api.week52Low }}<br>-->
+
+<!--&lt;!&ndash;        {% for key, value in api.items %}&ndash;&gt;-->
+<!--&lt;!&ndash;            {{ key }}: {{ value }}<br>&ndash;&gt;-->
+<!--&lt;!&ndash;        {% endfor %}&ndash;&gt;-->
+<!--    {% endif %}-->
+<!--{% endif %}-->
+
+<h4 style="color: green">Uploaded Dataset: <span style="font-weight: bold">{{name}}</span></h4><br>
+
+<form class="align-items-center" action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="document" style="overflow: hidden" class="btn btn-outline-secondary">
+    <button type="submit" class="btn btn-outline-secondary">Upload Dataset</button><br>
+</form><br>
+<form action="{% url 'printCAPM' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="printLSTM" value="Capital Asset Pricing Model" class="btn btn-success">
+</form><br>
+<form action="{% url 'printChart' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="printChart" value="Stock Prices Combined - Plot" class="btn btn-success">
+</form><br>
+<form action="{% url 'printRIDGE' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="printRIDGE" value="Ridge Linear Regression - Predictions" class="btn btn-success">
+</form><br>
+<form action="{% url 'printLSTM' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="printLSTM" value="Long Short-Term Memory - Predictions" class="btn btn-success">
+</form><br>
+
+
+
+{% endblock %}

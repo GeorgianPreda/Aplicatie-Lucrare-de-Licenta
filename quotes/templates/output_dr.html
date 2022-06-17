@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!--<div>-->
+<!--{{output_dr}}-->
+<!--</div>-->
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="table-success">
+    <tr>
+        <th scope="col">Company Name</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for list_capm in output_capm %}
+            <tr>
+                <th scope="row">{{stocks_daily_return}}</th>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

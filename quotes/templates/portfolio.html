@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!--{{ ticker }}-->
+
+<form action="{% url 'portfolio' %}" class="form-inline my-2 my-lg-0" method="POST">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="Add new stock to your portfolio" aria-label="Add new stock to your portfolio" name="ticker">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+</form>
+<br>
+<h1 style="text-align: center; font-weight: bold">Stock Portfolio</h1><br>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="table-success">
+    <tr>
+        <th scope="col">Company Name</th>
+        <th scope="col">Latest Price</th>
+        <th scope="col">Close Price</th>
+        <th scope="col">Market Cap</th>
+        <th scope="col">52Wk High</th>
+        <th scope="col">52Wk Low</th>
+        <th scope="col">YTD Change</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for list_item in output %}
+            <tr>
+                <th scope="row">{{list_item.companyName}}</th>
+                <td>{{list_item.latestPrice}}</td>
+                <td>{{list_item.previousClose}}</td>
+                <td>{{list_item.marketCap}}</td>
+                <td>{{list_item.week52High}}</td>
+                <td>{{list_item.week52Low}}</td>
+                <td>{{list_item.ytdChange}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% for item in ticker %}
+    <a href="{% url 'delete' item.id %}" class="btn btn-warning">Delete {{ item }}</a> &nbsp;
+    {% endfor %}
+
+
+
+
+{% endblock %}

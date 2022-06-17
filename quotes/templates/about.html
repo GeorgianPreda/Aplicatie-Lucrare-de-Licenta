@@ -1,0 +1,101 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!--<h4>Search a stock</h4>-->
+<form action="{% url 'about' %}" class="form-inline my-2 my-lg-0 text-justify" method="POST">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2"  type="search" placeholder="Type a symbol" aria-label="Search" name="ticker" id="ticker">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+</form>
+
+<!--<form class="form-inline" action="{% url 'about' %}" method="POST">    {% csrf_token %}-->
+<!--  <div class="form-group mx-sm-3 mb-2">-->
+<!--    <label for="ticker" class="sr-only">Ticker</label>-->
+<!--    <input type="search" placeholder="Type a symbol" aria-label="Search" name="ticker" id="ticker">-->
+<!--  </div>-->
+<!--  <button type="submit" class="btn btn-primary mb-2">GO</button>-->
+<!--</form>-->
+
+
+
+{% if ticker %}
+{{ ticker }}
+{% endif %}
+
+{% if api %}
+{% if api == "Error..." %}
+There was a problem with your ticker symbol, please try again..
+{% else %}
+
+<h1 style="text-align: center">{{ api.companyName }}</h1><br>
+
+<ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex justify-content-between align-items-center">Average Total Volume:     <span class="badge badge-primary badge-pill">{{ api.avgTotalVolume }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Calculation Price: <span class="badge badge-primary badge-pill">{{ api.calculationPrice }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Change: <span class="badge badge-primary badge-pill">{{ api.change }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Change Percent: <span class="badge badge-primary badge-pill">{{ api.changePercent }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Close: <span class="badge badge-primary badge-pill">{{ api.close }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Close Source: <span class="badge badge-primary badge-pill">{{ api.closeSource }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Close Time: <span class="badge badge-primary badge-pill">{{ api.closeTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Company Name: <span class="badge badge-primary badge-pill">{{ api.companyName }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Currency: <span class="badge badge-primary badge-pill">{{ api.currency }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Delayed Price: <span class="badge badge-primary badge-pill">{{ api.delayedPrice }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Delayed Price Time: <span class="badge badge-primary badge-pill">{{ api.delayedPriceTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Extended Change: <span class="badge badge-primary badge-pill">{{ api.extendedChange }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Extended Change Percent: <span class="badge badge-primary badge-pill">{{ api.extendedChangePercent }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Extendend Price: <span class="badge badge-primary badge-pill">{{ api.extendedPrice }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Extended Price Time <span class="badge badge-primary badge-pill">{{ api.extendedPriceTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">High <span class="badge badge-primary badge-pill">{{ api.high }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">High Source <span class="badge badge-primary badge-pill">{{ api.highSource }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">High Time <span class="badge badge-primary badge-pill">{{ api.highTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX Ask Price <span class="badge badge-primary badge-pill">{{ api.iexAskPrice }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX Ask Size <span class="badge badge-primary badge-pill">{{ api.iexAskSize }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX Bid PRice <span class="badge badge-primary badge-pill">{{ api.iexBidPrice }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX Bid Size <span class="badge badge-primary badge-pill">{{ api.iexBidSize }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX Close<span class="badge badge-primary badge-pill">{{ api.iexClose }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX CloseTime<span class="badge badge-primary badge-pill">{{ api.iexCloseTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX LastUpdated<span class="badge badge-primary badge-pill">{{ api.iexLastUpdated }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX MarketPercent<span class="badge badge-primary badge-pill">{{ api.iexMarketPercent }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX Open<span class="badge badge-primary badge-pill">{{ api.iexOpen }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX OpenTime<span class="badge badge-primary badge-pill">{{ api.iexOpenTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX RealtimePrice<span class="badge badge-primary badge-pill">{{ api.iexRealtimePrice }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX RealtimeSize <span class="badge badge-primary badge-pill">{{ api.iexRealtimeSize }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">IEX Volume<span class="badge badge-primary badge-pill">{{ api.iexVolume }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Last Trade Time<span class="badge badge-primary badge-pill">{{ api.lastTradeTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Latest Price<span class="badge badge-primary badge-pill">{{ api.latestPrice }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Latest Source<span class="badge badge-primary badge-pill">{{ api.latestSource }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Latest Time<span class="badge badge-primary badge-pill">{{ api.latestTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Latest Update<span class="badge badge-primary badge-pill">{{ api.latestUpdate }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Latest Volume<span class="badge badge-primary badge-pill">{{ api.latestVolume }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Low<span class="badge badge-primary badge-pill">{{ api.low }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Low Source<span class="badge badge-primary badge-pill">{{ api.lowSource }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Low Time<span class="badge badge-primary badge-pill">{{ api.lowTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Market Cap<span class="badge badge-primary badge-pill">{{ api.marketCap }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Odd Lot Delayed Pri<span class="badge badge-primary badge-pill">{{ api.oddLotDelayedPrice }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Odd Lot Delayed Pri<span class="badge badge-primary badge-pill">{{ api.oddLotDelayedPriceTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Open<span class="badge badge-primary badge-pill">{{ api.open }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Open Time<span class="badge badge-primary badge-pill">{{ api.openTime }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Open Source<span class="badge badge-primary badge-pill">{{ api.openSource }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">PE Ratio<span class="badge badge-primary badge-pill">{{ api.peRatio }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Previous Close<span class="badge badge-primary badge-pill">{{ api.previousClose }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Previous Volume<span class="badge badge-primary badge-pill">{{ api.previousVolume }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Primary Exchange <span class="badge badge-primary badge-pill">{{ api.primaryExchange }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Symbol<span class="badge badge-primary badge-pill">{{ api.symbol }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Volume<span class="badge badge-primary badge-pill">{{ api.volume }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Week 52 High<span class="badge badge-primary badge-pill">{{ api.week52High }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Week 52 Low<span class="badge badge-primary badge-pill">{{ api.week52Low }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">YTD Change<span class="badge badge-primary badge-pill">{{ api.ytdChange }}</span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">Is US Market Open<span class="badge badge-primary badge-pill">{{ api.isUSMarketOpen }}</span></li>
+</ul>
+
+
+<!--        {% for key, value in api.items %}-->
+<!--            {{ key }}: {{ value }}<br>-->
+<!--        {% endfor %}-->
+
+
+{% endif %}
+{% endif %}
+
+{% endblock %}

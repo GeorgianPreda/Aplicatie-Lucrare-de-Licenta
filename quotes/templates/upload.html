@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--{{ ticker }}-->
+
+<!--<form action="{% url 'portfolio' %}" class="form-inline my-2 my-lg-0" method="POST">-->
+<!--    {% csrf_token %}-->
+<!--    <input class="form-control mr-sm-2" type="search" placeholder="Add new stock to your portfolio" aria-label="Add new stock to your portfolio" name="ticker">-->
+<!--    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>-->
+<!--</form>-->
+<!--<br>-->
+<!--<h4 style="text-align: center">Stock Portfolio</h4>-->
+
+<h2>Upload files</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit">Upload</button>
+</form>
+
+{% endblock %}
